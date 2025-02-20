@@ -1,0 +1,93 @@
+$padding: 50px
+
+.single-wrapper
+    width: 100%
+    height: calc(100% - var(--menu-options-height))
+    display: flex
+    padding: 50px 50px 50px 50px
+    position: relative
+
+    .single-wrapper-image
+        position: relative
+        width: 30%
+        height: 100%
+
+        .absolute-wrapper
+            display: flex
+            justify-content: center
+
+    .description
+        position: relative
+        padding: 0 0 30px 30px
+        width: calc((100vw - var(--side-elements-width) - 50px - 50px) * .7)
+        height: 100%
+
+        .go-back
+            color: var(--third)
+            cursor: pointer
+            justify-content: flex-end
+            display: flex
+            right: 50px
+            font-size: 22px
+
+        .description_mid, .description_bottom, .description_price
+            color: var(--text-color-dark)
+
+        &_top
+            margin-top: 10px
+            color: #2b2b2b
+            font-weight: bold
+            line-height: 60px
+            display: block
+            width: 100%
+            font-size: 27px
+
+        &_mid
+            display: block
+            // line-height: 35px
+            font-size: 17px
+            margin-bottom: 30px
+
+        &_price
+            display: block
+            font-size: 20px
+            color: #2b2b2b !important
+
+        &_action
+            position: absolute
+            bottom: 0
+            right: 0
+            
+            .custom-button
+                border-radius: 60px !important
+                margin: 0 5px !important
+                width: 140px !important
+
+        &_sizes
+            width: 100%
+            display: flex
+            margin-bottom: 40px
+            column-gap: 30px
+
+            &_item
+                border: 1px solid transparent
+                cursor: pointer
+                padding: 6px 1px
+                color: black
+                flex: 1
+                text-align: center
+                border-radius: 3px
+                background-color: white
+                &.error:not(.not-available)
+                    border: 1px solid var(--error)
+                &.active
+                    padding: 5px 0
+                    border: 2px solid var(--third)
+                &.not-available
+                    background-color: var(--disabled)
+                    cursor: default
+                    color: gray
+                    pointer-events: none
+
+                &:hover:not(.not-available,.active)
+                    border: 1px solid var(--third)

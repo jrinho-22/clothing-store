@@ -1,0 +1,32 @@
+.form-radio-wrapper
+    width: 100%
+    padding: 22px 20px
+    border: 1px solid var(--text-color)
+    border-radius: 20px
+    display: flex
+    align-items: center
+    height: 70px
+    column-gap: 15px
+    cursor: pointer
+
+    &.checked
+        padding: 22px 19px
+        border: 2px solid black
+
+    [class^="mi-"]
+        font-size: 40px
+        color: black
+    [class^="i-"]
+        font-size: 30px
+        color: black
+
+    &_description
+        display: flex
+        flex-direction: column
+        // row-gap: 2px
+
+        &_title
+            color: black
+    &:hover
+        padding: 22px 19px
+        border: 2px solid black

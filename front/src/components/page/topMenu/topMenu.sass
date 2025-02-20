@@ -1,0 +1,65 @@
+$span-width: 450px
+.top-menu
+    position: absolute
+    width: 100%
+    height: var(--top-menu-height)
+    background-color: white
+    display: flex
+    justify-content: space-between
+    z-index: 19
+
+    &_left
+        display: flex
+        width: 70%
+        align-items: center
+
+    &_right
+        display: flex
+        width: 30%
+        width: max-content
+        align-items: center
+        margin-right: 20px
+        font-weight: 900
+
+        > :not(:first-child)::before
+            content: "|"
+            cursor: default
+            padding: 0 15px
+
+        .cart
+            cursor: pointer
+            &_item
+                position: relative
+                &_number
+                    line-height: 1
+                    padding: 0
+                    width: 59%
+                    top: 15px
+                    text-align: center
+                    left: 5px
+                    position: absolute
+                    font-weight: 500 !important
+                    font-size: 10px !important
+            
+
+        span
+            color: var(--background-color-dark)
+            cursor: pointer
+            &:not([class^="mi-"], [class^="i-"])
+                font-weight: 700
+                font-size: 12px
+                font-family: 'Noto-Sans' !important    
+
+.rollable-wrapper
+    width: 100%
+    overflow: hidden
+    // display: fle
+    .rollable-content
+        transition: 1s ease
+        width: max-content
+        display: flex
+        span
+            margin: 0 !important
+            width: $span-width
+            text-align: center
+            flex-grow: 1

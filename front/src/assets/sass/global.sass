@@ -1,0 +1,119 @@
+*
+  box-sizing: border-box !important
+  margin: 0
+
+// img
+//   // width: -webkit-fill-available
+//   height: -webkit-fill-available
+
+.img-fullwidth
+  width: -webkit-fill-available
+
+.img-fullheight
+  height: -webkit-fill-available
+
+.img-full
+  width: 100%
+  height: 100%
+
+span, label, input, li, h1, h2, h3, h4, h5
+  font-weight: 500
+  font-family: Averta !important
+  color: var(--text-color)
+
+.hide
+  display: none !important
+
+.soft-hide
+  opacity: 0 !important
+  pointer-events: none
+
+.Background
+  position: fixed
+  // z-index: 0
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  background-color: var(--background-color)
+
+button
+  width: max-content !important
+  border-radius: 10px !important
+  cursor: pointer !important
+  font-family: Noto-Sans !important
+  font-weight: 600 !important
+
+.position
+  &_large
+    grid-row: 1 / -1
+    grid-column: span 2
+    position: relative
+
+  &_medium
+    grid-row: 2 / -1
+    grid-column: span 2
+    position: relative
+
+  &_small
+    grid-row: 3 / -1
+    grid-column: span 2
+    position: relative
+
+.basic-wrapper
+  position: relative
+  width: 100%
+  height: 100%
+
+.absolute-wrapper
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+
+
+$widths: 1, 2, 3, 4, 5, 6, 7
+@each $width in $widths 
+  .width-#{$width} 
+    width: calc($width * 50px) !important
+
+.wave 
+  // width: 100%
+  // height: 100%
+  border-radius: 10px
+  animation: wave 3s infinite ease-in-out
+
+@keyframes wave 
+  0%, 50% 
+    background-color: rgb(240 240 240)
+  
+  30%, 100%
+    background-color: rgb(220 220 220)
+
+// .material-icons:before
+//   content: "\e8f9" 
+
+
+//   font-family: 'Material Icons'
+//   font-weight: normal
+//   font-style: normal
+//   font-size: 24px  /* Preferred icon size */
+//   display: inline-block
+//   line-height: 1
+//   text-transform: none
+//   letter-spacing: normal
+//   word-wrap: normal
+//   white-space: nowrap
+//   direction: ltr
+
+//   /* Support for all WebKit browsers. */
+//   -webkit-font-smoothing: antialiased
+//   /* Support for Safari and Chrome. */
+//   text-rendering: optimizeLegibility
+
+//   /* Support for Firefox. */
+//   -moz-osx-font-smoothing: grayscale
+
+//   /* Support for IE. */
+//   font-feature-settings: 'liga'

@@ -1,0 +1,46 @@
+
+button
+    all: unset
+    text-align: center
+    border: 2px solid transparent
+
+    &.full
+        width: 100% !important
+    
+    &.disabled
+        cursor: default !important
+        pointer-events: none !important
+
+    &.error
+        border: 2px solid var(--error)
+
+    &.type-1
+        font-size: 11px
+        background-color: var(--secondary)
+        color: white    
+        padding: 12px 27px
+
+    &.type-2
+        font-size: 15px
+        background-color: var(--third-light)
+        color: white
+        padding: 10px 20px
+        font-weight: 600
+        &.disabled
+            background-color: rgb(83 83 83) !important
+            color: #e5e5e5 !important
+        &:hover
+            background-color: var(--third)
+    
+    &.type-3
+        font-size: 15px
+        background-color: #ebe8e8
+        color: var(--third)
+        padding: 10px 20px
+        font-weight: 600
+        &:hover
+            background-color: #e0dddd
+            
+    
+    
+            

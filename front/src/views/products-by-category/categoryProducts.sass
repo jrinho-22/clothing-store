@@ -1,0 +1,155 @@
+$braether: 0px
+$column-gap: 60px
+$contens-margin: calc($column-gap / 2)
+$row-gap: 50px
+$column-gap-final: 70px
+$maxItemRowInitial: 3
+$maxItemRowFinal: calc($maxItemRowInitial + 1)
+$itemWidthFinal: calc(100% / $maxItemRowFinal )
+$serachBarPaddingLeft: 60px
+$serachBarPaddingRight: 35px
+$serachButtonWidth: 50px
+$actionWrapperPerc: .4
+$actionWrapperColGap: 15px
+$actionItemWidth: calc((100vw - $serachButtonWidth - $serachBarPaddingLeft - $serachBarPaddingRight - var(--menu-options-width) - var(--side-elements-width) * var(--side-toggle-menu)) * $actionWrapperPerc)
+
+.all-products-wrapper
+    display: flex
+    position: absolute
+    top: $braether
+    bottom: $braether
+    left: $braether
+    right: $braether
+    flex-direction: column
+
+    .floating-title
+        position: absolute
+        left: 30px
+        height: calc(var(--menu-options-height) - $braether)
+        display: flex
+        align-items: center
+        
+        div
+            position: absolute
+            transition: 1s ease
+            top: 50%
+            translate: 0 -50%
+
+            h1
+                color: var(--text-color-dark)
+
+
+
+    .search-container
+        // background-color: green
+        display: flex
+        align-items: center
+        // width: calc(100% - var(--menu-options-width))
+        // margin-right: var(--menu-options-width)
+        height: calc(var(--menu-options-height) - $braether)
+        padding: 0 35px 0 60px
+
+    // .content
+    //     position: absolute
+    //     left: $contens-margin
+    //     top: calc(var(--menu-options-height) - $braether)
+    //     // background-color: blue
+    //     margin-top: $braether
+    //     justify-content: flex-start
+    //     // height: calc(100% - var(--menu-options-height) - $braether)
+    //     display: flex
+    //     flex-wrap: wrap
+    //     row-gap: $row-gap
+    //     column-gap: $column-gap
+    //     bottom: 0
+    //     // translate: $itemWidth
+    //     width: 150%
+    //     transition: 1s ease
+    //     padding: $row-gap 0
+
+    //     &_item
+    //         // height: calc(100% - $row-gap)
+    //         width: calc($itemWidth - $column-gap)
+    //         // background-color: orange
+    //         transition: 1s ease
+    //         display: flex
+    //         align-items: center
+    //         justify-content: center
+
+    //         .basic-wrapper
+    //             display: flex
+    //             flex-direction: column
+
+    //             .background-wrapper
+    //                 height: $imagePercent
+    //                 width: 100%
+
+    //             .description
+    //                 height: calc(100% - $imagePercent)
+
+    //                 > span
+    //                     display: block
+    //                     font-size: 17px
+
+    //                 .description_mid, .description_bottom, .description_price
+    //                     transition: 0.2s ease
+    //                     transition-delay: 0
+    //                     opacity: 0
+    //                     color: var(--text-color-dark)
+
+    //                 &_top
+    //                     color: #2b2b2b
+    //                     font-weight: bold
+    //                     line-height: 35px
+
+    //                 &_mid
+    //                     line-height: 25px
+
+    //                 &_bottom
+    //                     margin: 5px 0 12px 0
+    //                     span
+    //                         color: #d8986bbd !important
+    //                         &.size-available
+    //                             opacity: 1
+    //                             color: #b55b1a !important
+    //                         &:not(:last-child)::after
+    //                             content: " - "
+
+    //                 &_price
+    //                     color: #2b2b2b !important
+
+    //             .absolute-wrapper
+    //                 display: flex
+    //                 justify-content: center
+    //                 bottom: calc(100% - $imagePercent)
+    &.expand
+        .floating-title
+            div
+                translate: 0 -270%
+        // .search
+        //     &_item
+        //         flex-grow: 1
+
+        // .content
+        //     // overflow: auto
+        //     left: 0
+        //     column-gap: $column-gap
+        //     width: 100%
+        //     overflow: auto
+        //     // width: calc(100vw - var(--side-elements-width) * var(--side-toggle-menu))
+        //     translate: 0
+        //     padding: 20px 0 50px $column-gap
+
+        //     .content_item
+        //         // margin-right: 10px
+        //         // height: calc(100% - $ row-gap)
+        //         width: calc($itemWidth - $column-gap)
+        //         // background-color: orange
+        //         // &:nth-child(#{$maxItemRowInitial}n)
+        //         //     margin-right: calc($column-gap / 2)
+        //         // &:nth-last-child(1):not(:nth-child(#{$maxItemRowInitial}n))
+        //         //     margin-right: calc($column-gap / 2)
+
+        //         .description_mid, .description_bottom, .description_price
+        //             transition-delay: 0.9s !important
+        //             opacity: 1

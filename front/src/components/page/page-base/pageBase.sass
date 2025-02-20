@@ -1,0 +1,81 @@
+.page-wrapper
+    height: calc(100% - var(--top-menu-height))
+    margin-top: var(--top-menu-height)
+    position: relative
+    margin-left: var(--side-elements-width)
+    transition: 1s ease
+
+    &.side-margin
+        margin-right: var(--menu-options-width)
+
+    &.shrink
+        margin-left: calc( var(--side-elements-width) * var(--side-toggle-menu) )!important
+        .grid
+            grid-template-columns: 40% 60% 
+
+    .grid
+        display: grid
+        grid-template-rows: repeat(3, 1fr)
+        grid-template-columns: 50% 50%
+        height: 100%
+        transition: 1s ease  
+
+        .img-wrapper
+            z-index: -2
+            position: absolute
+            left: 0
+            right: 0
+            top: 0
+            bottom: 0
+
+        .text
+            grid-column: 1
+            grid-row: 1 / -1
+                
+            .content
+                display: flex
+                margin-left: 30px
+                flex-direction: column
+                height: 100%    
+                // margin-left: var(--side-elements-width)
+                // margin-right: var(--menu-options-width)
+                transition: 1s ease
+
+                &.shrink
+                    margin-left: 2px
+                &_top
+                    height: 30%
+                    margin-top: 20px
+                    color: var(--text-color-dark)
+
+                &_bottom
+                    height: 70%
+                    display: flex
+                    padding-bottom: 30px
+                    flex-direction: column
+                    justify-content: flex-end
+
+                    &_new
+                        color: var(--text-color-dark)
+                        display: inline-block
+                        translate: 10px 0
+                        &:before
+                            content: "______"
+                            position: relative
+                            display: inline-block
+                            translate: -6px -4px
+
+                    &_title
+                        font-size: 60px
+                        margin-top: 20px
+                        line-height: 70px
+                        width: min-content
+                        color: var(--text-color-dark)
+
+                    &_description
+                        font-family: Noto-Sans !important
+                        line-height: 32px
+                        font-weight: 200
+                        margin-top: 25px
+                        width: 390px    
+                        font-size: 20px

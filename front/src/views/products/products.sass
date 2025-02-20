@@ -1,0 +1,55 @@
+$itemWidth: 200px
+$maxItemRow: 4
+$column-gap: 30px
+
+.main-wrapper
+    position: fixed
+    display: flex
+    bottom: calc(var(--main-content-margin-bottom) - 15px)
+    right: 0
+    top: calc(var(--menu-options-height) + 50px)
+    overflow: auto
+    width: $itemWidth * $maxItemRow
+    flex-wrap: wrap
+    justify-content: flex-start
+    row-gap: 40px
+    column-gap: $column-gap
+    transition: translate 1s ease
+    translate: $itemWidth
+
+    &.shrink
+        translate: 0
+        overflow: auto
+
+    .categorias
+        cursor: pointer
+        display: flex
+        flex-direction: column
+        width: $itemWidth - $column-gap
+        height: 170px
+
+        span
+            margin: 0
+            font-family: averta !important
+            width: 100%
+            font-size: 14px
+            justify-content: space-between
+            flex-direction: row-reverse
+            &::before
+                font-family: "biblioteca-icones-geral" !important
+                font-size: 18px
+
+
+        .imgg
+            display: flex
+            justify-content: center
+            width: 100%
+            height: 90%
+            border-bottom: 1px solid #a7a7a7
+            background-color: #c5c5c5
+            padding: 11px
+
+            img
+                height: 100%
+                width: 60%
+                
