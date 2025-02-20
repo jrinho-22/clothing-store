@@ -1,6 +1,6 @@
 import { IProdutosSizes } from "../interfaces/IProduct"
 
-export const baseURL = 'http://localhost:3001'
+export const baseURL = 'https://store-jrinho-3d4ec771db16.herokuapp.com'
 
 export const cloudinaryId = "dfmkh8oyt"
 
