@@ -20,7 +20,7 @@ export class Server {
     }
 
     listen() {
-        this._app.listen(port, () => {
+        this._app.listen(process.env.PORT || port, () => {
             console.log(`Server is running at http://localhost:${port}`);
         });
     }
