@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import PageBase from "../../components/page/page-base/pageBase"
 import { useTypesSeletor } from "../../hooks/typedSelector";
 import "./cart.sass"
-import { IProduto, IProdutoCart } from "../../interfaces/IProduct";
+import { IProdutoCart } from "../../interfaces/IProduct";
 import CartItem from "./components/cartItem";
 import CustomSideOptions from "./components/sideOptions";
 

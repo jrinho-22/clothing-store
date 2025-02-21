@@ -1,5 +1,5 @@
-import { configureStore, createSlice, EnhancedStore, PayloadAction, Slice, SliceSelectors } from "@reduxjs/toolkit";
-import { IProduto, IProdutoCart } from "../../interfaces/IProduct";
+import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
+import { IProdutoCart } from "../../interfaces/IProduct";
 import localStorage from "../localStorage"
 
 type checkoutType = {

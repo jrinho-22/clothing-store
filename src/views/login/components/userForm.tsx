@@ -3,7 +3,6 @@ import Button from "../../../components/button/button";
 import TextField from "../../../components/inputs/textField/textxField";
 import { actions } from "../../../store/reducers";
 import User from "../../models/user";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 

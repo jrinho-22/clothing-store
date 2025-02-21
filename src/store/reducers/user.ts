@@ -1,5 +1,4 @@
-import { configureStore, createSlice, EnhancedStore, PayloadAction, Slice, SliceSelectors } from "@reduxjs/toolkit";
-import { IProduto, IProdutoCart } from "../../interfaces/IProduct";
+import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import localStorage from "../localStorage"
 import { IUsers } from "../../interfaces/IUser";
 

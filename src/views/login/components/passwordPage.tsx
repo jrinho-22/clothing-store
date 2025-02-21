@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import Button from "../../../components/button/button";
 import TextField from "../../../components/inputs/textField/textxField";
 import Credential from "../../models/creadentialLookup";
-import { useTypesSeletor } from "../../../hooks/typedSelector";
 import { useDispatch } from "react-redux";
 import { actions } from "../../../store/reducers";
 import { useNavigate } from "react-router-dom";

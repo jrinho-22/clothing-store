@@ -1,9 +1,8 @@
 import { RouterProvider } from "react-router-dom"
 import router from "./router/router"
-import { createContext, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import storeInstance from "./store/store";
-import TopMenu from "./components/page/topMenu/topMenu";
+import Router from "./router/router";
 
 function App() {
 
@@ -12,7 +11,7 @@ function App() {
   // }, []);
   return (
     <Provider store={storeInstance}>
-      <RouterProvider router={router} />
+      <Router />
     </Provider>
   )
 }

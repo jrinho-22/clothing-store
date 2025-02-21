@@ -54,7 +54,7 @@ const SingleProducts = ({ product, closeEmit }: props) => {
         <div className="single-wrapper">
             <div className="single-wrapper-image">
                 <div className="absolute-wrapper">
-                    <AdvancedImage className="img-fullheight" cldImg={cld.image(product?.imgDisplay)} />
+                    <AdvancedImage className="img-fullheight" cldImg={cld.image(product?.imgDisplay || undefined)} />
                 </div>
                 <AdvancedImage className="img-full" cldImg={cld.image("studio-background_ryp1gv")} />
             </div>

@@ -1,4 +1,4 @@
-import { configureStore, createSlice, EnhancedStore, PayloadAction, Slice, SliceSelectors } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import localStorage from "../localStorage"
 import { cardInformation, endereco } from "../../views/checkout/checkout";
 

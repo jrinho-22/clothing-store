@@ -1,7 +1,6 @@
 import { useState, useEffect, useImperativeHandle, forwardRef, useRef } from "react";
 import PageBase from "../../components/page/page-base/pageBase";
 import { useTypesSeletor } from "../../hooks/typedSelector";
-import { IProdutoCart } from "../../interfaces/IProduct";
 import CustomSideOptions from "./components/sideOptions";
 import "./checkout.sass"
 import { useForm, ValidationRule } from "react-hook-form";
@@ -37,10 +36,6 @@ export type endereco = {
     number: string
 }
 
-type SingleElementProps = {
-    triggerForm: boolean
-}
-
 const Checkout = ({ }: Props) => {
     // const [triggerForm, setTriggerForm] = useState(false)
     const formRef = useRef<{ submitForm: () => any }>(null);
@@ -61,11 +56,11 @@ const Checkout = ({ }: Props) => {
         const navigate = useNavigate()
         const [skip, setSkip] = useState(true);
         const selectorUser = useTypesSeletor(v => v.user)
-        const selectorOrder = useTypesSeletor(v => v.order)
+        // const selectorOrder = useTypesSeletor(v => v.order)
         const dispatch = useDispatch()
-        const [products, setProducts] = useState<IProdutoCart[]>([])
-        const cartItems = useTypesSeletor((state) => state.checkout.items);
-        const { setError, setValue, watch, getValues, unregister, register, handleSubmit, formState, trigger, clearErrors } = useForm<formValuesType>();
+        // const [products, setProducts] = useState<IProdutoCart[]>([])
+        // const cartItems = useTypesSeletor((state) => state.checkout.items);
+        const { setError, watch, getValues, unregister, register, handleSubmit, formState, trigger, clearErrors } = useForm<formValuesType>();
         const [defaultLocation, setDefaultlocation] = useState<{ defaultLocation: boolean, newLocation: endereco | undefined }>({
             defaultLocation: true, newLocation: undefined
         })
@@ -84,7 +79,7 @@ const Checkout = ({ }: Props) => {
         // triggerForm && handleSubmit(onSubmit)()
         // }, [triggerForm]);
 
-        const onSubmit = async (data: any) => {
+        const onSubmit = async () => {
             if (!defaultCard.defaultCard && !defaultCard.newCard) {
                 setError("newCard", { type: "manual", message: "new card must be set!" });
                 return;
@@ -109,9 +104,9 @@ const Checkout = ({ }: Props) => {
             }
         })
 
-        useEffect(() => {
-            setProducts(cartItems)
-        }, [cartItems]);
+        // useEffect(() => {
+        //     setProducts(cartItems)
+        // }, [cartItems]);
 
         const changeLoading = () => {
             dispatch(actions.order.setLoading(true))

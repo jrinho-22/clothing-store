@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import Collection from "../models/collection"
-import { ICollection, ICollectionNew } from "../../interfaces/ICollection";
+import { ICollectionNew } from "../../interfaces/ICollection";
 import './home.sass'
 import { AdvancedImage } from "@cloudinary/react";
 import { cld } from "../../helpers/cloundinary.config";
 import Button from "../../components/button/button";
-import SideOptions from "../../components/page/sideOptions/sideOptions";
 import PageBase from "../../components/page/page-base/pageBase";
 import CustomSideOptions from "./components/CustomSideOptions";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +13,7 @@ const Home = () => {
 
   const collectionModel = new Collection()
   const defaultIndex = 0
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [img, setImg] = useState(cld.image(''));
   const [collection, setCollection] = useState<ICollectionNew[]>([]);
   const [activeCollection, setActiveCollection] = useState<ICollectionNew | null>(null);
@@ -28,7 +27,7 @@ const Home = () => {
   useEffect(() => {
     if (collection.length) {
       setActiveCollection(collection[defaultIndex])
-      setLoading(false)
+      // setLoading(false)
     }
   }, [collection]);
 

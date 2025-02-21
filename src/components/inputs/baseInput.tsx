@@ -15,8 +15,11 @@ type props = {
     type: "textfield" | "checkBox"
     style?: Object
     colorType?: "black" | "dimgrey"
-    error: FieldError | undefined
-    inputType: HTMLInputTypeAttribute
+    error?: FieldError | undefined
+    inputType?: HTMLInputTypeAttribute
+    name?: string
+    onBlur?: (e: React.FocusEvent<HTMLInputElement, Element>) => any
+    onChange?: () => any
 }
 
 const BaseInput = forwardRef<HTMLInputElement, props>(({ inputType = "text", error, colorType = "black", style, type, classes, title, clickEmitter = () => { }, valueEmitter = () => { }, value, children, ...props }, ref) => {

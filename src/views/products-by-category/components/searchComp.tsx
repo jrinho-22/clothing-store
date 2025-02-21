@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react"
 import CheckBox from "../../../components/inputs/checkbox/checkbox"
-import TextField from "../../../components/inputs/textField/textxField"
 import SearchElement from "../../../components/searchBar/searchBar"
 import useFilters, { filterRecord } from "../../../hooks/useFilters"
 import Produto from "../../models/products"

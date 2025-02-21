@@ -1,6 +1,5 @@
 import AxiosIntance from "../../axios/axios";
 import { ICategoria } from "../../interfaces/ICategoria";
-import { IProduto } from "../../interfaces/IProduct";
 
 class Categoria extends AxiosIntance<ICategoria> {
     config() {

@@ -3,9 +3,7 @@ import SideOptions from "../../../components/page/sideOptions/sideOptions"
 import { useTypesSeletor } from "../../../hooks/typedSelector";
 import "./sideOptions.sass"
 import { getPartialCard } from "../../../helpers/general";
-import { cardInformation, endereco } from "../checkout";
 import Loading from "../../../components/loading/loading";
-import { transition } from "@cloudinary/url-gen/actions/effect";
 
 type props = {
     actionEmitter: () => any

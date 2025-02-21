@@ -1,5 +1,5 @@
-import { forwardRef, HTMLInputTypeAttribute, useEffect, useRef, useState } from "react";
-import BaseInput, { InputValue } from "../baseInput";
+import { forwardRef, HTMLInputTypeAttribute, useEffect, useState } from "react";
+import BaseInput from "../baseInput";
 import { FieldError } from "react-hook-form";
 
 type props = {

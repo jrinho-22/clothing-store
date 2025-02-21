@@ -22,7 +22,7 @@ const CustomSideOptions = ({ collection, setActiveCollection }: props) => {
                                     <AdvancedImage className='img-fullheight' cldImg={myImage} />
                                 </div>
                             </div>
-                            <div style={{ backgroundColor: backColor }} className="menu-options_bottom_item" onClick={(e) => { setActiveCollection(coll) }}>
+                            <div style={{ backgroundColor: backColor }} className="menu-options_bottom_item" onClick={() => { setActiveCollection(coll) }}>
 
                                 <span className='new-collection'>
                                     {coll.new ? "New collection" : ""}

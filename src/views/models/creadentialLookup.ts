@@ -1,5 +1,4 @@
 import AxiosIntance from "../../axios/axios";
-import { IProduto } from "../../interfaces/IProduct";
 import { IUsers } from "../../interfaces/IUser";
 
 class Credential extends AxiosIntance<IUsers> {

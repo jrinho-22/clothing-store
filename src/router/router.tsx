@@ -1,30 +1,29 @@
 import {
-  createBrowserRouter,
+  HashRouter,
   Navigate,
   RouteObject,
+  Routes,
+  Route
 } from "react-router-dom";
-import Home from "../views/home/home";
-import Products from "../views/products/products";
 import homeRouter from "../views/home/router";
 import productsRouter from "../views/products/router";
-import { cartRoute, homeRoute } from "../helpers/conts";
+import { homeRoute } from "../helpers/conts";
 import allProductsRouter from "../views/products-by-category/routes";
 import cartRouter from "../views/cart/router";
 import Skeleton from "../components/page/skeleton/skeleton";
 import Login from "../views/login/login";
 import checkoutRouter from "../views/checkout/router";
 
-const defaultRoute: RouteObject =
-{
+// Define routes
+const defaultRoute: RouteObject = {
   path: "*",
   element: <Navigate to={homeRoute} replace />,
-}
+};
 
-const emptyRoute: RouteObject =
-{
+const emptyRoute: RouteObject = {
   path: "",
   element: <Navigate to={homeRoute} replace />,
-}
+};
 
 const routes = [
   {
@@ -41,13 +40,29 @@ const routes = [
       allProductsRouter,
       checkoutRouter,
       emptyRoute,
-      defaultRoute
+      defaultRoute,
     ],
   },
-]
+];
 
-const Router = createBrowserRouter([
-  ...routes
-]);
+// Use HashRouter instead of createBrowserRouter
+const Router = () => (
+  <HashRouter>
+    <Routes>
+      {routes.map((route, index) => (
+        <Route key={index} path={route.path} element={route.element}>
+          {route.children &&
+            route.children.map((child, childIndex) => (
+              <Route
+                key={childIndex}
+                path={child.path}
+                element={child.element}
+              />
+            ))}
+        </Route>
+      ))}
+    </Routes>
+  </HashRouter>
+);
 
-export default Router 
+export default Router;

@@ -39,7 +39,7 @@ const CheckBox = forwardRef<HTMLInputElement, props>(({
         }
     };
 
-    const handleInputClick = (event: any) => {
+    const handleInputClick = () => {
         setShowDrop(!showDrop);
     };
 

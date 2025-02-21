@@ -19,7 +19,7 @@ const AllProducts = ({ loading, propsductsCollection, expand, singleProductsEmit
     }, [loading]);
     return (
         <div className={`content-all-products ${!propsductsCollection.length && !loading ? "no-item" : ""} ${!expand ? "expand" : ""}`}>
-            {loading ? itemsToLoad.map(v => <div className="wave"></div>) :
+            {loading ? itemsToLoad.map(() => <div className="wave"></div>) :
                 propsductsCollection.length ? propsductsCollection.map(p =>
                     <div onClick={() => singleProductsEmit(p)} className={`content-all-products_item`}>
                         <div className="basic-wrapper">
@@ -37,7 +37,7 @@ const AllProducts = ({ loading, propsductsCollection, expand, singleProductsEmit
                                 <span className="description_price">R${String(p.preco)}</span>
                             </div>
                             <div className="absolute-wrapper">
-                                <AdvancedImage className="img-fullheight" cldImg={cld.image(p.imgDisplay)} />
+                                <AdvancedImage className="img-fullheight" cldImg={cld.image(p.imgDisplay || undefined)} />
                             </div>
                         </div>
                     </div>

@@ -3,7 +3,7 @@ import SideMenu from "../sideMenu/sideMenu"
 import TopMenu from "../topMenu/topMenu"
 import { Outlet } from "react-router-dom";
 
-export const MenuContext = createContext({menuState: true, setMenuState: (v: boolean) => {}});
+export const MenuContext = createContext({menuState: true, setMenuState: (_v: boolean) => {}});
 
 const Skeleton = () => {
     const [showMenu, setShowMenu] = useState<boolean>(true);

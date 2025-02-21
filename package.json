@@ -1,6 +1,7 @@
 {
   "name": "front",
   "private": true,
+  "homepage": "/clothing-store/#",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import "./login.sass"
 import SignUpForm from "./components/userForm"
 import EntryPage from "./components/entryPage"

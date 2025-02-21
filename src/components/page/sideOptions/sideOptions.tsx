@@ -1,7 +1,5 @@
-import { ReactNode, useEffect } from 'react'
+import { ReactNode } from 'react'
 import './sideOptions.sass'
-import { useTypesSeletor } from '../../../hooks/typedSelector'
-import { useNavigate } from 'react-router-dom'
 
 export type sideOptionsType = {
   children?: ReactNode
@@ -10,8 +8,8 @@ export type sideOptionsType = {
 
 
 const SideOptions: React.FC<sideOptionsType> = ({ children }: sideOptionsType) => {
-  const items = useTypesSeletor((state) => state.checkout.items.length);
-  const navigate = useNavigate()
+  // const items = useTypesSeletor((state) => state.checkout.items.length);
+  // const navigate = useNavigate()
   return (
     <div className={`menu-options`}>
       {/* <div className="menu-options_top">
