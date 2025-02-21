@@ -50,7 +50,6 @@ const Products = () => {
     useEffect(() => {
         if (forwardCategoria) {
             if (forwardCategoria.state == "Women") {
-                console.log("felll")
                 navigate(`/all-products`, {
                     state: {
                         filter: { sex: { value: ["W"], field: "sex", rule: "equal" } },
@@ -59,7 +58,6 @@ const Products = () => {
                     }
                 })
             } else {
-                console.log("felll2222")
                 navigate(`/all-products`, {
                     state: {
                         filter: { categoria: { value: forwardCategoria.state, field: "categoria", rule: "equal" } },

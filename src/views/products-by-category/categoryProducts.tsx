@@ -72,7 +72,7 @@ const CategoryProducts = ({ }: props) => {
                 <div className="floating-title">
                     <div>
                         {!label?.includes("Collection") && <h1>All</h1>}
-                        <h1 style={{ width: "max-content" }}>{pageLabel()}</h1>
+                        <h1>{pageLabel()}</h1>
                     </div>
                 </div>
                 <div className="search-container">
