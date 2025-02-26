@@ -28,12 +28,18 @@ const SearchComp = ({ collectionEmit, paramsValue }: props) => {
         collection: { value: [], field: "collection", rule: "equal" },
         sex: { value: [], field: "sex", rule: "equal" }
     }
-    const { filteredCollection, updateValues, record, clearRecord, getFilteredCollection } = useFilters<IProduto>(productsModel, fieldValues)
+    const { defaultCollection, updateValues, record, clearRecord, getFilteredCollection } = useFilters<IProduto>(productsModel, fieldValues)
 
     useEffect(() => {
         getAllCategorias()
         getAllCollection()
     }, []);
+
+    const clearReacordEmit = async() => {
+        clearRecord()
+        const defaultCollectionValue = await defaultCollection 
+        collectionEmit(defaultCollectionValue|| [])
+    }
 
     const getAllCategorias = async () => {
         const categorias = await categoriasModel.getSubCategories()
@@ -46,12 +52,9 @@ const SearchComp = ({ collectionEmit, paramsValue }: props) => {
     }
 
     const search = async () => {
-        await getFilteredCollection()
-    }
-
-    useEffect(() => {
+        const filteredCollection = await getFilteredCollection()
         collectionEmit(filteredCollection || [])
-    }, [filteredCollection]);
+    }
 
     useEffect(() => {
         paramsValue
@@ -72,11 +75,8 @@ const SearchComp = ({ collectionEmit, paramsValue }: props) => {
         return useMemo(() => allCategorias.map(cat => { return { value: cat._id, label: cat.nome } }), [allCategorias])
     }
 
-    // const memoizedUser = useMemo(() => paramsValue, [paramsValue])
-    // const User = useMemo(() => catgoriasCollection(), [allCategorias])
-
     return (
-        <SearchElement record={record} clearEmitter={() => clearRecord()} searchEmitter={() => search()} notStatic={true}>
+        <SearchElement record={record} clearEmitter={() => clearReacordEmit()} searchEmitter={() => search()} notStatic={true}>
             <CheckBox value={record.categoria?.value} title="Categoria" emitter={(value) => updateValues("categoria", value)} collection={catgoriasCollection()} classes="width-4" />
             <CheckBox value={record.collection?.value} title="Collection" emitter={(value) => updateValues("collection", value)} collection={collectionCollection()} classes="width-4" />
             <CheckBox value={record.size?.value} title="Size" emitter={(value) => updateValues("size", value)} collection={sizesCollection()} classes="width-3" />

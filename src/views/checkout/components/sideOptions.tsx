@@ -30,10 +30,6 @@ const CustomSideOptions = ({ actionEmitter }: props) => {
         setCartValues(cart)
     }, [cartItems]);
 
-    useEffect(() => {
-        console.log(selectorOrder, 'selectorOrderselectorOrder');
-    }, [selectorOrder.payment]);
-
     const getStyle = () => {
         return selectorOrder.loading ? {opacity: ".1", transition: "none"} : {}
     }

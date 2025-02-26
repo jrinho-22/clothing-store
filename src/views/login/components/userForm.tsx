@@ -41,6 +41,8 @@ const SignUpForm = ({ email }: props) => {
         }
         const res = await userModel.post(newUser)
         dispatch(actions.user.setUser(res))
+        dispatch(actions.order.setDelivery(res?.endereco))
+        dispatch(actions.order.setPayment(res?.cardInformation[0]))
         navigate("/home")
     };
 

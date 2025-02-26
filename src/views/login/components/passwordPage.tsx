@@ -23,7 +23,9 @@ const PasswordPage = ({ email }: Props) => {
     const onSubmit = async (data: dataType) => {
         const user = await credential.post<{ password: string }>({ password: data.password }, email)
         if (user) {
-            dispatch(actions.user.setUser(user))        
+            dispatch(actions.user.setUser(user))
+            dispatch(actions.order.setDelivery(user.endereco))
+            dispatch(actions.order.setPayment(user.cardInformation[0]))        
             navigate("/home")
         } else {
             alert("Password incorrect");

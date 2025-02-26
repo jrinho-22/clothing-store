@@ -7,15 +7,14 @@ export type filterRecord<T> = {
 }
 
 const useFilters = <T>(arg: AxiosIntance<T> | Promise<T[]>, initialRecord: filterRecord<T>) => {
-    const [collection, setcollection] = useState<Promise<T[]>>();
-    const [filteredCollection, setFilteredCollection] = useState<T[]>();
+    const [defaultCollection, setDefaultCollection] = useState<Promise<T[]>>();
     const [record, setRecord] = useState<filterRecord<T>>(initialRecord);
 
     useEffect(() => {
         if (arg instanceof AxiosIntance) {
-            setcollection(arg.get())
+            setDefaultCollection(arg.get())
         } else {
-            setcollection(arg)
+            setDefaultCollection(arg)
         }
     }, []);
 
@@ -27,7 +26,7 @@ const useFilters = <T>(arg: AxiosIntance<T> | Promise<T[]>, initialRecord: filte
         for (let i in record) {
             updateValues(i, [])
         }
-        setFilteredCollection(await collection)
+        // setFilteredCollection(await collection)
     }
 
     const updateValues = (field: keyof T, value: (string | undefined)[]) => {
@@ -36,14 +35,14 @@ const useFilters = <T>(arg: AxiosIntance<T> | Promise<T[]>, initialRecord: filte
     }
 
     const getFilteredCollection = async () => {
-        if (!collection) return []
-        const fullfiledCollection = await collection
-        console.log(fullfiledCollection, 'fiull')
+        if (!defaultCollection) return []
+        const fullfiledCollection = await defaultCollection
         const searchBuilders = new SearchBuilders<T>(fullfiledCollection, record)
         const newfilteredCollection = searchBuilders.testFilter()
-        setFilteredCollection(newfilteredCollection)
+        // setFilteredCollection(newfilteredCollection)
+        return newfilteredCollection
     }
-    return { filteredCollection, updateValues, record, clearRecord, getFilteredCollection }
+    return { defaultCollection, updateValues, record, clearRecord, getFilteredCollection }
 }
 
 export default useFilters

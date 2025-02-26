@@ -9,56 +9,44 @@ import SearchComp from "./components/searchComp"
 import useGetParam from "../../hooks/navigation"
 import { filterRecord } from "../../hooks/useFilters"
 import { MenuContext } from "../../components/page/skeleton/skeleton"
-type props = {
+import { delay } from "../../helpers/general"
 
-}
-
-
-const CategoryProducts = ({ }: props) => {
+const CategoryProducts = () => {
     const SingleElement = () => {
         const menuContex = useContext(MenuContext)
         const productsModel = new Produto()
         const [renderProducts, setRenderProducts] = useState<IProduto[]>([]);
         const [singleProduct, setSingleProduct] = useState<IProduto | undefined>();
         const [loading, setLoading] = useState<boolean>(true);
-        const {filter, label, field} = useGetParam<{ filter: filterRecord<IProduto>, label: string, field: keyof IProduto }>("state") ?? {};
+        const { filter, label, field } = useGetParam<{ filter: filterRecord<IProduto>, label: string, field: keyof IProduto }>("state") ?? {};
         const [passParams, setPassParams] = useState(true)
-        useEffect(() => {
-            !filter
-            && !label
-            && getAllProducts() 
-        }, [filter, label]);
 
         useEffect(() => {
             getAllProducts()
-        }, []);
+        }, [filter]);
 
         const getAllProducts = async () => {
             const products = filter
                 ? await productsModel.get(filter)
                 : await productsModel.get()
             setRenderProducts(products)
+            setLoading(false)
         }
 
-        useEffect(() => {
-            setLoading(true)
-            setTimeout(() => {
-                setLoading(false)
-            }, 1900);
-        }, [renderProducts]);
-
-        const serachEmitterHandler = (coll: IProduto[]) => {
+        const serachEmitterHandler = async (coll: IProduto[]) => {
             setLoading(true)
             setPassParams(false)
             setRenderProducts(coll)
+            await delay(2000)
+            setLoading(false)
         }
 
         const getParamsValues = () => {
             return filter
-            && field
-            && passParams
-            && { field: field, value: filter[field]?.value }
-            || undefined
+                && field
+                && passParams
+                && { field: field, value: filter[field]?.value }
+                || undefined
         }
 
         const pageLabel = (): string => {
@@ -78,9 +66,10 @@ const CategoryProducts = ({ }: props) => {
                 <div className="search-container">
                     <SearchComp paramsValue={getParamsValues()} collectionEmit={(coll) => serachEmitterHandler(coll)} />
                 </div>
-                {singleProduct ?
-                    <SIngleProducts closeEmit={() => setSingleProduct(undefined)} product={singleProduct} /> :
-                    <AllProducts loading={loading} singleProductsEmit={(pro) => setSingleProduct(pro)} propsductsCollection={renderProducts} expand={menuContex.menuState} />}
+                {singleProduct
+                    ? <SIngleProducts closeEmit={() => setSingleProduct(undefined)} product={singleProduct} />
+                    : <AllProducts loading={loading} singleProductsEmit={(pro) => setSingleProduct(pro)} propsductsCollection={renderProducts} expand={menuContex.menuState} />
+                }
             </div>
         )
     }

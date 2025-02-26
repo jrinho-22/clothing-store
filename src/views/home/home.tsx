@@ -8,50 +8,37 @@ import Button from "../../components/button/button";
 import PageBase from "../../components/page/page-base/pageBase";
 import CustomSideOptions from "./components/CustomSideOptions";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from 'react-query';
 
 const Home = () => {
-
   const collectionModel = new Collection()
   const defaultIndex = 0
   // const [loading, setLoading] = useState(true);
   const [img, setImg] = useState(cld.image(''));
-  const [collection, setCollection] = useState<ICollectionNew[]>([]);
+  // const [loading, setLoading] = useState(false);
+  // const [collection, setCollection] = useState<ICollectionNew[]>([]);
   const [activeCollection, setActiveCollection] = useState<ICollectionNew | null>(null);
   const navigate = useNavigate()
-
-
-  useEffect(() => {
-    getColection()
-  }, []);
+  const { data, isLoading, isError, refetch } = useQuery('collection', () => collectionModel.getValidCollections(), { suspense: true });
 
   useEffect(() => {
-    if (collection.length) {
-      setActiveCollection(collection[defaultIndex])
-      // setLoading(false)
+    if (data && data.length) {
+      setActiveCollection(data[defaultIndex])
     }
-  }, [collection]);
+  }, [data]);
 
   useEffect(() => {
     activeCollection && setImg(cld.image(activeCollection.imgId))
   }, [activeCollection]);
 
-  const getColection = async () => {
-    const collection = await collectionModel.getValidCollections()
-    console.log(collection, 'collll')
-    setCollection(collection)
-  }
-
   const MySideOptions = () => {
     return (
-      <CustomSideOptions setActiveCollection={setActiveCollection} collection={collection} />
+      <CustomSideOptions setActiveCollection={setActiveCollection} collection={data || []} />
     )
   }
 
   const MyImage = (): JSX.Element => {
     let customStyle: Object = {}
-    // if (activeCollection?.imgId == "samples/woman-on-a-football-field") {
-      // customStyle = { translate: "80px 0" }
-    // }
     return (
       <AdvancedImage style={customStyle} className="img-fullheight" cldImg={img} />
     )
@@ -59,11 +46,13 @@ const Home = () => {
 
   const MyText = (): JSX.Element => {
     const handleClick = () => {
-      navigate(`/all-products`, { state: {
-        filter: { collection: { value: [activeCollection?._id], field: "collection", rule: "equal" } },
-        label: activeCollection?.nome,
-        field: "collection"
-      } })
+      navigate(`/all-products`, {
+        state: {
+          filter: { collection: { value: [activeCollection?._id], field: "collection", rule: "equal" } },
+          label: activeCollection?.nome,
+          field: "collection"
+        }
+      })
     }
     return (
       <>
@@ -81,56 +70,21 @@ const Home = () => {
     )
   }
 
+  // if (isLoading) {
+  //   throw new Promise((resolve) => resolve);
+  // }
+
   return (
-    <>
-      <PageBase
-        customClass="home-custom-class"
-        sideOptionsMargin={true}
-        title={activeCollection?.nome || ""}
-        description={activeCollection?.description || ""}
-        Main={MyImage}
-        CustomSideOptions={<MySideOptions />}
-      >
-        <MyText />
-      </PageBase>
-    </>
-    // <>
-    //   {!loading && activeCollection ? (
-    //     <div className={`page-wrapper ${!menuContex ? "shrink" : ""}`}>
-    //       <div className="img-wrapper-outer">
-    //         <div className="img-wrapper">
-    //           <AdvancedImage cldImg={img} />
-    //         </div>
-    //       </div>
-    //       <div className="content">
-    //         <span className="content_top">Clothes designer</span>
-    //         <div className="content_bottom">
-    //           {activeCollection.new &&
-    //             <span className="content_bottom_new">
-    //               New
-    //             </span>
-    //           }
-    //           <h1 className="content_bottom_title">{activeCollection.nome}</h1>
-    //           <h3 className="content_bottom_description"> {activeCollection.description}</h3>
-    //           <Button style={{marginTop: "23px"}} label="SEE COLLECTION"></Button>
-    //         </div>
-    //       </div>
-    //     </div>
-    //     // <div className="grid">
-    //     //   <span className="item1">{activeCollection.nome}</span>
-    //     //   <div className="item2">
-    //     //     {activeCollection.imgId}
-    //     //   </div>
-    //     //   <div className="item3">
-    //     //     <AdvancedImage cldImg={img} />
-    //     //   </div>
-    //     // </div>
-    //   ) : (<div>
-    //     loading
-    //   </div>)
-    //   }
-    //   <SideOptions setActiveCollection={setActiveCollection} collection={collection}></SideOptions>
-    // </>
+    <PageBase
+      customClass="home-custom-class"
+      sideOptionsMargin={true}
+      title={activeCollection?.nome || ""}
+      description={activeCollection?.description || ""}
+      Main={MyImage}
+      CustomSideOptions={<MySideOptions />}
+    >
+      <MyText />
+    </PageBase>
   )
 }
 

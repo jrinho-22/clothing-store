@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import axiosConfig from "./axios.config";
 import { SearchBuilders } from "../helpers/filters";
 import { filterRecord } from "../hooks/useFilters";
+import { delay } from "../helpers/general";
 
 abstract class AxiosIntance<T> {
     protected _apiClient: AxiosInstance
@@ -35,9 +36,10 @@ abstract class AxiosIntance<T> {
     }
 
     async get(filterRecord?: filterRecord<T>, extraPath?: string): Promise<T[]> {
+        await delay(2000)
         if (!extraPath) extraPath = ""
         try {
-            const response = await this._apiClient.get<T[]>(`${this._resource}/${extraPath}`);
+            const response = await this._apiClient.get<T[]>(`${this._resource}/${extraPath}`, {timeout: 900000});
             if (filterRecord) {
                 const searchBuilders = new SearchBuilders<T>(response.data, filterRecord)
                 return searchBuilders.testFilter()

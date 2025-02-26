@@ -213,8 +213,8 @@ const Checkout = ({ }: Props) => {
                         <>
                             <span className="subtitle">Card Information</span>
                             <div className="group">
-                                <TextField value={defaultCard.newCard?.number} error={formState.errors.cardInformation?.number} {...register("cardInformation.number", { required: validation().cardInformation })} colorType="dimgrey" style={{ width: "70%" }} title="Number" />
-                                <TextField value={defaultCard.newCard?.security} error={formState.errors.cardInformation?.security} {...register("cardInformation.security", { required: validation().cardInformation })} colorType="dimgrey" style={{ width: "20%" }} title="Security Code" />
+                                <TextField value={defaultCard.newCard?.number} error={formState.errors.cardInformation?.number} {...register("cardInformation.number", { required: validation().cardInformation })} colorType="dimgrey" style={{ width: "60%" }} title="Number" />
+                                <TextField value={defaultCard.newCard?.security} error={formState.errors.cardInformation?.security} {...register("cardInformation.security", { required: validation().cardInformation })} colorType="dimgrey" style={{ width: "30%" }} title="Security Code" />
                                 <TextField value={defaultCard.newCard?.expiration} error={formState.errors.cardInformation?.expiration} {...register("cardInformation.expiration", { required: validation().cardInformation })} colorType="dimgrey" style={{ width: "30%" }} title="Expiration Date" />
                             </div>
                             <div className="action">
