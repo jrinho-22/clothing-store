@@ -37,7 +37,7 @@ const SingleElement = () => {
 const Cart = () => {
 
     return (
-        <PageBase CustomSideOptions={<CustomSideOptions />} SingleElement={<SingleElement />} />
+        <PageBase CustomSideOptions={CustomSideOptions} SingleElement={<SingleElement />} />
     )
 }
 

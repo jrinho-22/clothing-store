@@ -1,5 +1,4 @@
 import AxiosIntance from "../../axios/axios";
-import { delay } from "../../helpers/general";
 import { ICollection, ICollectionNew } from "../../interfaces/ICollection";
 
 class Collection extends AxiosIntance<ICollection> {

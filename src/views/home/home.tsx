@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import Collection from "../models/collection"
 import { ICollectionNew } from "../../interfaces/ICollection";
 import './home.sass'
@@ -34,20 +34,19 @@ const Home = () => {
     activeCollection && setImg(cld.image(activeCollection.imgId))
   }, [activeCollection]);
 
-  const MySideOptions = () => {
+  const MySideOptions = useCallback(() => {
     return (
       <CustomSideOptions setActiveCollection={setActiveCollection} collection={data || []} />
     )
-  }
+  }, [data, setActiveCollection])
 
-  const MyImage = (): JSX.Element => {
-    let customStyle: Object = {}
+  const MyImage = useCallback(() => {
     return (
-      <AdvancedImage style={customStyle} className="img-fullheight" cldImg={img} />
+      <AdvancedImage className="img-fullheight" cldImg={img} />
     )
-  }
+  }, [img])
 
-  const MyText = (): JSX.Element => {
+  const MyText = useCallback(() => {
     const handleClick = () => {
       navigate(`/all-products`, {
         state: {
@@ -59,14 +58,12 @@ const Home = () => {
     }
     return (
       <>
-        <>
-          <h1 className="content_bottom_title">{activeCollection?.nome}</h1>
-          <h3 className="content_bottom_description"> {activeCollection?.description}</h3>
-        </>
+        <h1 className="content_bottom_title">{activeCollection?.nome}</h1>
+        <h3 className="content_bottom_description"> {activeCollection?.description}</h3>
         <Button clickEmitter={() => handleClick()} type="1" style={{ marginTop: "23px" }} label="SEE COLLECTION"></Button>
       </>
     )
-  }
+  }, [activeCollection])
 
   return (
     <PageBase
@@ -74,11 +71,10 @@ const Home = () => {
       sideOptionsMargin={true}
       title={activeCollection?.nome || ""}
       description={activeCollection?.description || ""}
+      Text={MyText}
       Main={MyImage}
-      CustomSideOptions={<MySideOptions />}
-    >
-      <MyText />
-    </PageBase>
+      CustomSideOptions={MySideOptions}
+    />
   )
 }
 

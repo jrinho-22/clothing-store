@@ -1,4 +1,4 @@
-import { useState, useEffect, useImperativeHandle, forwardRef, useRef } from "react";
+import { useState, useEffect, useImperativeHandle, forwardRef, useRef, useCallback } from "react";
 import PageBase from "../../components/page/page-base/pageBase";
 import { useTypesSeletor } from "../../hooks/typedSelector";
 import CustomSideOptions from "./components/sideOptions";
@@ -37,29 +37,17 @@ export type endereco = {
 }
 
 const Checkout = ({ }: Props) => {
-    // const [triggerForm, setTriggerForm] = useState(false)
     const formRef = useRef<{ submitForm: () => any }>(null);
-    // useEffect(() => {
-    //     console.log('12345')
-    //     triggerForm
-    //     && formRef.current
-    //     && formRef.current?.submitForm()
-    //     // setTriggerForm(false)
-    // }, [triggerForm]);
-
     const triggerForm = () => {
         formRef.current && formRef.current?.submitForm()
 
     }
 
-    const SingleElement = forwardRef<{ submitForm: () => void }, any>(({}, ref) => {
+    const SingleElement = forwardRef<{ submitForm: () => void }, any>(({ }, ref) => {
         const navigate = useNavigate()
         const [skip, setSkip] = useState(true);
         const selectorUser = useTypesSeletor(v => v.user)
-        // const selectorOrder = useTypesSeletor(v => v.order)
         const dispatch = useDispatch()
-        // const [products, setProducts] = useState<IProdutoCart[]>([])
-        // const cartItems = useTypesSeletor((state) => state.checkout.items);
         const { setError, watch, getValues, unregister, register, handleSubmit, formState, trigger, clearErrors } = useForm<formValuesType>();
         const [defaultLocation, setDefaultlocation] = useState<{ defaultLocation: boolean, newLocation: endereco | undefined }>({
             defaultLocation: true, newLocation: undefined
@@ -73,11 +61,6 @@ const Checkout = ({ }: Props) => {
                 handleSubmit(onSubmit)();
             }
         }));
-
-        // useEffect(() => {
-        // console.log(triggerForm, 'trkdnlkjenckjeb')
-        // triggerForm && handleSubmit(onSubmit)()
-        // }, [triggerForm]);
 
         const onSubmit = async () => {
             if (!defaultCard.defaultCard && !defaultCard.newCard) {
@@ -103,10 +86,6 @@ const Checkout = ({ }: Props) => {
                 cardInformation[enderecoKey] && clearErrors(`cardInformation.${enderecoKey}`)
             }
         })
-
-        // useEffect(() => {
-        //     setProducts(cartItems)
-        // }, [cartItems]);
 
         const changeLoading = () => {
             dispatch(actions.order.setLoading(true))
@@ -231,8 +210,13 @@ const Checkout = ({ }: Props) => {
         )
     })
 
+    const MySideOptions = () => {
+        return (
+            <CustomSideOptions actionEmitter={() => triggerForm()} />)
+    }
+
     return (
-        <PageBase CustomSideOptions={<CustomSideOptions actionEmitter={() => triggerForm()} />} SingleElement={<SingleElement ref={formRef} triggerForm={triggerForm} />} />
+        <PageBase CustomSideOptions={MySideOptions} SingleElement={<SingleElement ref={formRef} triggerForm={triggerForm} />} />
     )
 };
 

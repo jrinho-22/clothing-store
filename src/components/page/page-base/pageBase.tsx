@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { memo, useContext, useEffect } from "react"
 import "./pageBase.sass"
 import { MenuContext } from "../skeleton/skeleton"
 
@@ -7,11 +7,12 @@ type props = {
     title?: string
     description?: string
     Main?: React.ComponentType
-    CustomSideOptions?: JSX.Element
+    CustomSideOptions?: React.ComponentType
     sideOptionsMargin?: boolean
     SingleElement?: JSX.Element
     size?: 'large' | 'medium' | 'small'
-    customClass?: string
+    customClass?: string,
+    Text?: React.ComponentType
 }
 const convertSize = (size: 'large' | 'medium' | 'small') => {
     if (size == 'large') return "position_large"
@@ -27,8 +28,8 @@ const PageBase: React.FC<props> = (
         Main,
         CustomSideOptions,
         SingleElement,
-        children,
-        sideOptionsMargin = false
+        sideOptionsMargin = false,
+        Text
     }: props) => {
     console.log('Page base Component re-rendered');
     const menuContex = useContext(MenuContext);
@@ -54,23 +55,23 @@ const PageBase: React.FC<props> = (
                     <div className="grid">
                         {Main && <div className={`${convertSize(size)}`}>
                             <div className="img-wrapper">
-                                <Main />
+                                {Main && <Main />}
                             </div>
                         </div>}
                         <div className="text">
                             <div className="content">
                                 <span className="content_top"></span>
                                 <div className="content_bottom">
-                                    {children || <DefaultText />}
+                                    {Text ? <Text /> : <DefaultText />}
                                 </div>
                             </div>
                         </div>
                     </div>
                 }
             </div>
-            {CustomSideOptions && CustomSideOptions}
+            {CustomSideOptions && <CustomSideOptions />}
         </>
     )
 }
 
-export default PageBase
+export default memo(PageBase)

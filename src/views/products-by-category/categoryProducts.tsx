@@ -50,8 +50,12 @@ const CategoryProducts = () => {
         }
 
         const pageLabel = (): string => {
+            const getCollectionName = (collection: string) => {
+                const collectionNameArray = collection.split(" ")
+                return collectionNameArray[0]
+            }
             return label
-                ? label
+                ? getCollectionName(label)
                 : "Products"
         }
 
@@ -59,8 +63,17 @@ const CategoryProducts = () => {
             <div className={`all-products-wrapper ${!menuContex.menuState ? "expand" : ""}`}>
                 <div className="floating-title">
                     <div>
-                        {!label?.includes("Collection") && <h1>All</h1>}
-                        <h1>{pageLabel()}</h1>
+                        {label?.includes("Collection")
+                            ? <>
+                                <h1>{pageLabel()}</h1>
+                                <h1>Collection</h1>
+
+                            </>
+                            : <>
+                                <h1>All</h1>
+                                <h1>{pageLabel()}</h1>
+                            </>
+                        }
                     </div>
                 </div>
                 <div className="search-container">
