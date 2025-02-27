@@ -1,6 +1,5 @@
 import { RouteObject } from "react-router-dom";
 import { homeRoute } from "../../helpers/conts";
-import SuspenseHome from "./components/suspenseHome";
 import Home from "./home";
 
 const homeRouter: RouteObject =

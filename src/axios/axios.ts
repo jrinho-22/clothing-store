@@ -2,18 +2,42 @@ import axios, { AxiosInstance } from "axios";
 import axiosConfig from "./axios.config";
 import { SearchBuilders } from "../helpers/filters";
 import { filterRecord } from "../hooks/useFilters";
-import { delay } from "../helpers/general";
 
-abstract class AxiosIntance<T> {
+
+abstract class AxiosIntance<T = any> {
     protected _apiClient: AxiosInstance
     protected _resource: string
+    protected _conection: boolean = false
 
     constructor() {
         this._apiClient = axios.create(axiosConfig);
         this._resource = this.config()
     }
 
-    abstract config(): string
+    abstract config(): string 
+
+    static async firstModelInit<T extends AxiosIntance>(this: new (...args: any[]) => T, connected: boolean): Promise<T> {
+        const axiosSubClass = new this()
+        await axiosSubClass.connect(connected)
+        return axiosSubClass
+    }
+
+    async connect(connected: boolean) {
+        if (connected) return 
+        let _conection = false
+        while (!_conection) {
+            try {
+                const response = await this._apiClient.get(this._resource);
+                if (response.status === 200) {
+                    _conection = true;
+                    console.log('Backend connected!');
+                }
+            } catch (error) {
+                console.log('Backend not available yet, retrying...');
+                await new Promise((resolve) => setTimeout(resolve, 2000));
+            }
+        }
+    }
 
     // interface AxiosResponse<T = any, D = any>  {
     //     data: T;
@@ -36,10 +60,9 @@ abstract class AxiosIntance<T> {
     }
 
     async get(filterRecord?: filterRecord<T>, extraPath?: string): Promise<T[]> {
-        await delay(2000)
         if (!extraPath) extraPath = ""
         try {
-            const response = await this._apiClient.get<T[]>(`${this._resource}/${extraPath}`, {timeout: 900000});
+            const response = await this._apiClient.get<T[]>(`${this._resource}/${extraPath}`, { timeout: 900000 });
             if (filterRecord) {
                 const searchBuilders = new SearchBuilders<T>(response.data, filterRecord)
                 return searchBuilders.testFilter()

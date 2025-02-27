@@ -10,19 +10,22 @@ import CustomSideOptions from "./components/CustomSideOptions";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from 'react-query';
 
+const getModel = async (connected: boolean) => {
+  const collectionModel = await Collection.firstModelInit(connected)
+  return collectionModel.getValidCollections()
+}
+
 const Home = () => {
-  const collectionModel = new Collection()
   const defaultIndex = 0
-  // const [loading, setLoading] = useState(true);
+  const [connected, setConnected] = useState(false);
   const [img, setImg] = useState(cld.image(''));
-  // const [loading, setLoading] = useState(false);
-  // const [collection, setCollection] = useState<ICollectionNew[]>([]);
   const [activeCollection, setActiveCollection] = useState<ICollectionNew | null>(null);
   const navigate = useNavigate()
-  const { data, isLoading, isError, refetch } = useQuery('collection', () => collectionModel.getValidCollections(), { suspense: true });
+  const { data } = useQuery('collection', async () => getModel(connected), { suspense: true });
 
   useEffect(() => {
     if (data && data.length) {
+      setConnected(true)
       setActiveCollection(data[defaultIndex])
     }
   }, [data]);
@@ -56,11 +59,6 @@ const Home = () => {
     }
     return (
       <>
-        {/* {activeCollection?.new &&
-          <span className="content_bottom_new">
-            New
-          </span>
-        } */}
         <>
           <h1 className="content_bottom_title">{activeCollection?.nome}</h1>
           <h3 className="content_bottom_description"> {activeCollection?.description}</h3>
@@ -69,10 +67,6 @@ const Home = () => {
       </>
     )
   }
-
-  // if (isLoading) {
-  //   throw new Promise((resolve) => resolve);
-  // }
 
   return (
     <PageBase
@@ -88,5 +82,4 @@ const Home = () => {
   )
 }
 
-
-export default Home
+export default Home;
